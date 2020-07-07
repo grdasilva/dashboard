@@ -1,0 +1,29 @@
+body {
+    margin: 10px;
+}
+
+table {
+    width: 100%;
+}
+  
+.mat-form-field {
+    font-size: 14px;
+}
+
+.full {
+    width: 100%;
+}
+  
+td, th {
+    width: 25%;
+}
+
+.linkData {
+    color: #ffffff; /* Change this with links color*/
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.linkData:hover {
+    color: aqua;
+} 
