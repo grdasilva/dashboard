@@ -20,6 +20,7 @@ export class TableComponent implements OnInit {
   dataSource: MatTableDataSource<IBGE>;
   searchString: string;
   state;
+  displayedFilters: string[] = [];
 
   constructor(private TestingService: TestingService) { }
 
@@ -42,9 +43,22 @@ export class TableComponent implements OnInit {
     this.TestingService.getByID(name).subscribe((data: any) => {
       this.state == 'Bootstrap' ? this.dados.results = data.pokemon_species : this.dataSource = data.pokemon_species;  
     });
+    this.addFilter(name);
   }
 
   methodSort(colName) {
     this.dados.results = this.dados.results.sort((a, b) => a[colName] > b[colName] ? 1 : a[colName] < b[colName] ? -1 : 0)
   }
+
+  addFilter(name) {
+    if (this.displayedFilters.length === 0) {
+      this.displayedFilters.push(name);
+    } else {
+      let existentFilter = this.displayedFilters.filter(filter => filter == name);
+      if (existentFilter.length == 0) {
+        this.displayedFilters.push(name);
+      }
+    }
+  }
+
 }

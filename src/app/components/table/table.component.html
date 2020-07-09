@@ -8,6 +8,7 @@
 </mat-form-field>
 
 <div *ngIf="state == 'Material'">
+    <mat-card>INICIO / <span *ngFor="let item of displayedFilters"> {{ item | uppercase }} / </span></mat-card>
     <mat-form-field class="full">
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Busque" #input>
@@ -42,6 +43,9 @@
 </div>
 
 <div *ngIf="state == 'Bootstrap'">
+    <div class="card">
+        <h3 class="card-body">INICIO / <span *ngFor="let item of displayedFilters"> {{ item | uppercase }} / </span></h3>
+    </div>
     <div class="input-group">
         <input type="text" class="form-control" name="searchString" placeholder="Type to search..."
             [(ngModel)]="searchString" style="margin-bottom: 10px;" />
