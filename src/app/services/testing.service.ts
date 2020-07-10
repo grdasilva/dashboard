@@ -11,7 +11,7 @@ import { IBGE } from './../interfaces/ibge';
 export class TestingService {
 
   url = 'https://servicodados.ibge.gov.br/api/v1/localidades/distritos';
-  urlAgregate = 'https://pokeapi.co/api/v2/pokemon-habitat';
+  urlPoke = 'https://pokeapi.co/api/v2/pokemon-habitat';
 
   constructor(private http: HttpClient) { }
 
@@ -21,14 +21,14 @@ export class TestingService {
         catchError(this.handleError));
   }
 
-  getAgregate(): Observable<any[]> {
-    return this.http.get<any[]>(this.urlAgregate)
+  getTypesOfHabitat(): Observable<Pokemon[]> {
+    return this.http.get<any[]>(this.urlPoke)
       .pipe(
         catchError(this.handleError));
   }
 
-  getByID(filter: string): Observable<Pokemon[]> {
-      const url = `${this.urlAgregate}/${filter}`;
+  getPokemonByHabitat(filter: string): Observable<Pokemon[]> {
+      const url = `${this.urlPoke}/${filter}`;
       return this.http.get<any[]>(url).pipe(
         catchError(this.handleError)
       );

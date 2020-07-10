@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, OnChanges } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { IBGE } from './../../interfaces/ibge';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { TestingService } from 'src/app/services/testing.service';
+import { Pokemon } from 'src/app/interfaces/pokemon';
 
 @Component({
   selector: 'app-table',
@@ -13,19 +14,23 @@ import { TestingService } from 'src/app/services/testing.service';
 export class TableComponent implements OnInit {
 
   @Input() dados;
+  state;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   
   displayedColumns: string[] = ['name', 'url'];
-  dataSource: MatTableDataSource<IBGE>;
+  dataSource: MatTableDataSource<Pokemon>;
   searchString: string;
-  state;
   displayedFilters: string[] = [];
+  optionsOfDropdown = [
+    { name: "Bootstrap", value: "Bootstrap" },
+    { name: "Material", value: "Material" }
+  ];
 
-  constructor(private TestingService: TestingService) { }
+  constructor(private testingService: TestingService) { }
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.dados.results);
+    this.dataSource = new MatTableDataSource(this.dados);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -40,10 +45,10 @@ export class TableComponent implements OnInit {
   }
 
   updateTable(name) {
-    this.TestingService.getByID(name).subscribe((data: any) => {
-      this.state == 'Bootstrap' ? this.dados.results = data.pokemon_species : this.dataSource = data.pokemon_species;  
+    this.testingService.getPokemonByHabitat(name).subscribe((data: any) => {
+      this.state == 'Bootstrap' ? this.dados = data.pokemon_species : this.dataSource = data.pokemon_species;  
     });
-    this.addFilter(name);
+    this.addFilter(name); 
   }
 
   methodSort(colName) {

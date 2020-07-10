@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TestingService } from '../../services/testing.service';
+import { Pokemon } from 'src/app/interfaces/pokemon';
 
 @Component({
   selector: 'app-panel',
@@ -8,17 +9,17 @@ import { TestingService } from '../../services/testing.service';
 })
 export class PanelComponent implements OnInit {
 
-  ibgeData: any[];
+  data: Pokemon[];
 
-  constructor(private TestingService:TestingService) { }
+  constructor(private testingService:TestingService) { }
 
   ngOnInit(): void {
     this.getData();
   }
 
   getData() {
-    this.TestingService.getAgregate().subscribe((districts: any[]) => {
-      this.ibgeData = districts;
+    this.testingService.getTypesOfHabitat().subscribe((habitat: any) => {
+      this.data = habitat.results;
     });
   }
 

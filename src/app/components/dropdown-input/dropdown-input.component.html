@@ -1,1 +1,7 @@
-<p>dropdown-input works!</p>
+<h4>Selecione a tabela que deseja ver </h4>
+<mat-form-field appearance="fill">
+  <mat-label>Escolha sua opção</mat-label>
+  <mat-select [(ngModel)]="state">
+    <mat-option *ngFor="let item of data" value="{{ item.value }}">{{ item.name }}</mat-option>
+  </mat-select>
+</mat-form-field>
