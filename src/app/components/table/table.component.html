@@ -1,13 +1,13 @@
-<!-- <app-dropdown-input [data]="optionsOfDropdown"></app-dropdown-input> -->
+<app-dropdown-input [data]="optionsOfDropdown" (changedData)="onChangedValue($event)"></app-dropdown-input>
 
-<h4>Selecione a tabela que deseja ver </h4>
+<!-- <h4>Selecione a tabela que deseja ver </h4>
 <mat-form-field appearance="fill">
   <mat-label>Escolha sua opção</mat-label>
   <mat-select [(ngModel)]="state">
     <mat-option value="Bootstrap">Bootstrap</mat-option>
     <mat-option value="Material">Material</mat-option>
   </mat-select>
-</mat-form-field>
+</mat-form-field> -->
 
 <div *ngIf="state == 'Material'">
     <mat-card>INICIO / <span *ngFor="let item of displayedFilters"> {{ item | uppercase }} / </span></mat-card>

@@ -48,7 +48,8 @@ export class TableComponent implements OnInit {
     this.testingService.getPokemonByHabitat(name).subscribe((data: any) => {
       this.state == 'Bootstrap' ? this.dados = data.pokemon_species : this.dataSource = data.pokemon_species;  
     });
-    this.addFilter(name); 
+    this.addFilter(name);
+    this.searchString = '';
   }
 
   methodSort(colName) {
@@ -64,6 +65,10 @@ export class TableComponent implements OnInit {
         this.displayedFilters.push(name);
       }
     }
+  }
+
+  onChangedValue(eventData) {
+    this.state = eventData;
   }
 
 }
