@@ -4,19 +4,20 @@ import { retry, catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { Pokemon } from './../interfaces/pokemon';
 import { IBGE } from './../interfaces/ibge';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TestingService {
 
-  url = 'https://servicodados.ibge.gov.br/api/v1/localidades/distritos';
-  urlPoke = 'https://pokeapi.co/api/v2/pokemon-habitat';
+  readonly url = `${environment.APIBGE}localidades`;
+  readonly urlPoke = `${environment.API}pokemon-habitat`;
 
   constructor(private http: HttpClient) { }
 
   getDistrict(): Observable<IBGE[]> {
-    return this.http.get<any[]>(this.url)
+    return this.http.get<any[]>(`${this.url}/distritos`)
       .pipe(
         catchError(this.handleError));
   }

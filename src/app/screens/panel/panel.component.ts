@@ -22,5 +22,4 @@ export class PanelComponent implements OnInit {
       this.data = habitat.results;
     });
   }
-
 }
