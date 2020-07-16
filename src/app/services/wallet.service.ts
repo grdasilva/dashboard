@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ErrorHandler } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { retry, catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
@@ -26,7 +26,7 @@ export class WalletService {
         catchError(this.handleError));
   }
 
-  handleError(error: HttpErrorResponse) {
+  handleError(error: HttpErrorResponse): Observable<any[]> {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // Erro ocorreu no lado do client
@@ -37,6 +37,6 @@ export class WalletService {
     }
     console.log(errorMessage);
     return throwError(errorMessage);
-  };
+  }
 
 }

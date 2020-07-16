@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PanelComponent } from './screens/panel/panel.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,6 @@ import { FormsModule }   from '@angular/forms';
     ComponentsModule,
     HttpClientModule,
     FormsModule
-    
   ],
   providers: [],
   bootstrap: [AppComponent]

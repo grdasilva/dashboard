@@ -17,25 +17,24 @@ export class TableComponent implements OnInit {
   state;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  
   displayedColumns: string[] = ['name', 'url'];
   dataSource: MatTableDataSource<Pokemon>;
   searchString: string;
   displayedFilters: string[] = [];
   optionsOfDropdown = [
-    { name: "Bootstrap", value: "Bootstrap" },
-    { name: "Material", value: "Material" }
+    { name: 'Bootstrap', value: 'Bootstrap' },
+    { name: 'Material', value: 'Material' }
   ];
 
   constructor(private testingService: TestingService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.dados);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
+  applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -44,31 +43,30 @@ export class TableComponent implements OnInit {
     }
   }
 
-  updateTable(name) {
+  updateTable(name): void {
     this.testingService.getPokemonByHabitat(name).subscribe((data: any) => {
-      this.state == 'Bootstrap' ? this.dados = data.pokemon_species : this.dataSource = data.pokemon_species;  
+      this.state === 'Bootstrap' ? this.dados = data.pokemon_species : this.dataSource = data.pokemon_species;
     });
     this.addFilter(name);
     this.searchString = '';
   }
 
-  methodSort(colName) {
-    this.dados.results = this.dados.results.sort((a, b) => a[colName] > b[colName] ? 1 : a[colName] < b[colName] ? -1 : 0)
+  methodSort(colName): void {
+    this.dados.results = this.dados.results.sort((a, b) => a[colName] > b[colName] ? 1 : a[colName] < b[colName] ? -1 : 0);
   }
 
-  addFilter(name) {
+  addFilter(name): void {
     if (this.displayedFilters.length === 0) {
       this.displayedFilters.push(name);
     } else {
-      let existentFilter = this.displayedFilters.filter(filter => filter == name);
-      if (existentFilter.length == 0) {
+      const existentFilter = this.displayedFilters.filter(filter => filter === name);
+      if (existentFilter.length === 0) {
         this.displayedFilters.push(name);
       }
     }
   }
 
-  onChangedValue(eventData) {
+  onChangedValue(eventData): void {
     this.state = eventData;
   }
-
 }

@@ -11,13 +11,13 @@ export class PanelComponent implements OnInit {
 
   data: Pokemon[];
 
-  constructor(private testingService:TestingService) { }
+  constructor(private testingService: TestingService) { }
 
   ngOnInit(): void {
     this.getData();
   }
 
-  getData() {
+  getData(): void {
     this.testingService.getTypesOfHabitat().subscribe((habitat: any) => {
       this.data = habitat.results;
     });

@@ -5,3 +5,4 @@ export interface Client {
     mbbLastMonthInvestment: number;
     mbbCurrentMonthInvestment: number;
 }
+

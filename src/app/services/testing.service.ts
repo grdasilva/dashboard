@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { retry, catchError } from 'rxjs/operators';
-import { throwError, Observable } from 'rxjs';
+import { throwError, Observable, ErrorObserver } from 'rxjs';
 import { Pokemon } from './../interfaces/pokemon';
 import { IBGE } from './../interfaces/ibge';
 import { environment } from 'src/environments/environment';
@@ -29,13 +29,13 @@ export class TestingService {
   }
 
   getPokemonByHabitat(filter: string): Observable<Pokemon[]> {
-      const url = `${this.urlPoke}/${filter}`;
-      return this.http.get<any[]>(url).pipe(
-        catchError(this.handleError)
-      );
-  } 
+    const url = `${this.urlPoke}/${filter}`;
+    return this.http.get<any[]>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
 
-  handleError(error: HttpErrorResponse) {
+  handleError(error: HttpErrorResponse): Observable<any[]> {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // Erro ocorreu no lado do client
@@ -46,6 +46,5 @@ export class TestingService {
     }
     console.log(errorMessage);
     return throwError(errorMessage);
-  };
-
+  }
 }

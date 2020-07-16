@@ -10,13 +10,12 @@ export class DropdownInputComponent implements OnInit {
   @Input() data;
   @Output() changedData = new EventEmitter();
 
-  constructor() { 
-  }
+  constructor() {}
 
   ngOnInit(): void {
   }
 
-  updateData(value) {
+  updateData(value: string): void {
     this.changedData.emit(value);
   }
 

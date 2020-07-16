@@ -21,6 +21,6 @@ export interface IBGE {
                     }
                 }
             }
-        } 
-    }
+        }
+    };
 }
