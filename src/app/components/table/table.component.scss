@@ -1,10 +1,6 @@
 body {
     margin: 10px;
 }
-
-table {
-    width: 100%;
-}
   
 .mat-form-field {
     font-size: 14px;
@@ -13,19 +9,15 @@ table {
 .full {
     width: 100%;
 }
-  
-td, th {
-    width: 25%;
-}
 
 .linkData {
-    color: #ffffff; /* Change this with links color*/
+    color: #000000; /* Change this with links color*/
     cursor: pointer;
     text-decoration: underline;
 }
 
 .linkData:hover {
-    color: aqua;
+    color: blue;
 } 
 
 .card {
@@ -37,4 +29,16 @@ td, th {
     .card-body {
         margin-bottom: 25px;
     }
+}
+
+table {
+    font-family: arial, sans-serif;
+    width: 100%;
+}
+  
+td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+    vertical-align: middle;
 }

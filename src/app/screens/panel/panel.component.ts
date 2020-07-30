@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TestingService } from '../../services/testing.service';
-import { Pokemon } from 'src/app/interfaces/pokemon';
+import { PanelService } from '../../services/panel.service';
+import { PainelEC } from 'src/app/interfaces/painelEC';
 
 @Component({
   selector: 'app-panel',
@@ -9,17 +9,17 @@ import { Pokemon } from 'src/app/interfaces/pokemon';
 })
 export class PanelComponent implements OnInit {
 
-  data: Pokemon[];
+  data: PainelEC[];
 
-  constructor(private testingService: TestingService) { }
+  constructor(private panelService: PanelService) { }
 
   ngOnInit(): void {
     this.getData();
   }
 
   getData(): void {
-    this.testingService.getTypesOfHabitat().subscribe((habitat: any) => {
-      this.data = habitat.results;
+    this.panelService.getInformationPanelRH().subscribe((data: any) => {
+      this.data = data;
     });
   }
 }

@@ -1,59 +1,100 @@
 <app-dropdown-input [data]="optionsOfDropdown" (changedData)="onChangedValue($event)"></app-dropdown-input>
 
-<div *ngIf="state == 'Material'">
-    <mat-card>INICIO / <span *ngFor="let item of displayedFilters"> {{ item | uppercase }} / </span></mat-card>
-    <mat-form-field class="full">
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Busque..." #input>
-    </mat-form-field>
-
-    <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort>
-
-            <!-- ID Column -->
-            <ng-container matColumnDef="{{ displayedColumns[0] }}">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ displayedColumns[0] | titlecase }} </th>
-                <td mat-cell *matCellDef="let element" class="link" (click)="updateTable(element.name)">
-                    {{ element.name | titlecase }} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="{{ displayedColumns[1] }}">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ displayedColumns[1] | titlecase }} </th>
-                <td mat-cell *matCellDef="let element"> <a href="{{ element.url }}">{{element.url }} </a></td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-            <!-- Row shown when there is no matching data. -->
-            <tr class="mat-row" *matNoDataRow>
-                <td class="mat-cell" colspan="4">Nenhum resultado encontrado com o filtro: "{{input.value}}"</td>
-            </tr>
-        </table>
-
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-    </div>
+<div class="card">
+    <h3 class="card-body"><span (click)="rebuildTable()">INICIO /</span><span *ngFor="let item of displayedFilters"> {{ item | uppercase }} / </span>
+    </h3>
+</div>
+<div class="input-group">
+    <input type="text" class="form-control" name="searchString" placeholder="Busque..." [(ngModel)]="searchString"
+        style="margin-bottom: 10px;" />
 </div>
 
-<div *ngIf="state == 'Bootstrap'">
-    <div class="card">
-        <h3 class="card-body">INICIO / <span *ngFor="let item of displayedFilters"> {{ item | uppercase }} / </span></h3>
-    </div>
-    <div class="input-group">
-        <input type="text" class="form-control" name="searchString" placeholder="Busque..."
-            [(ngModel)]="searchString" style="margin-bottom: 10px;" />
-    </div>
-    <table class="table table-striped table-dark table-hover">
-        <thead>
-            <tr>
-                <th (click)="methodSort(item)" scope="col" *ngFor="let item of displayedColumns">{{ item | titlecase }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of dados | filter : 'name' : searchString; let i = index">
-                <td class="linkData" scope="row" (click)="updateTable(item.name)">{{ item.name | titlecase }}</td>
-                <td scope="row">{{ item.url }}</td>
-            </tr>
-        </tbody>
+<div *ngIf="state == 'Painel RH'">
+    <table class="table table-striped table-responsive table-hover">
+        <tr class="thead-light">
+            <th></th>
+            <th rowspan="1" colspan="18">Clientes faturados</th>
+            <th rowspan="1" colspan="5" style="text-align: center;">Clientes em andamento - Data de atualização: {{ dateNow | date: 'dd/MM/yyyy' }}</th>
+        </tr>
+        <tr class="thead-light">
+            <th rowspan="2">Rede</th>
+            <th rowspan="2">Base ativa mês anterior</th>
+            <th rowspan="2">Potencial mês anterior</th>
+            <th rowspan="1" colspan="3">Ganhos Clientes</th>
+            <th rowspan="1" colspan="3">Perdas Clientes</th>
+            <th rowspan="2">Base ativa mês atual</th>
+            <th rowspan="2">Potencial mês atual</th>
+            <th rowspan="1" colspan="2">Faturamento Cartões</th>
+            <th rowspan="1" colspan="2">Faturamento MDR Utilização</th>
+            <th rowspan="1" colspan="2">Rebate</th>
+            <th rowspan="1" colspan="2">Fiança</th>
+            <th rowspan="1" colspan="5">Total em andamento</th>
+            <th rowspan="1" colspan="5">Declinados</th>
+        </tr>
+        <tr class="thead-light">
+            <th>Total ganhos (+) </th>
+            <th>Novos</th>
+            <th>Migrações</th>
+            <th>Total perdas (-) </th>
+            <th>Cancelamentos</th>
+            <th>Migrações</th>
+            <th>Mês Anterior</th>
+            <th>Mês Atual</th>
+            <th>Mês Anterior</th>
+            <th>Mês Atual</th>
+            <th>Valor mês anterior</th>
+            <th>Valor mês atual</th>
+            <th>Valor mês anterior</th>
+            <th>Valor mês atual</th>
+            <th>Qtd Clientes</th>
+            <th>Faturamento Refeição</th>
+            <th>Faturamento Alimentação</th>
+            <th>Faturamento Transporte</th>
+            <th>Faturamento Total</th>
+            <th>Qtd Clientes</th>
+            <th>Faturamento Refeição</th>
+            <th>Faturamento Alimentação</th>
+            <th>Faturamento Transporte</th>
+            <th>Faturamento Total</th>
+        </tr>
+        <tr *ngFor="let line of dados | filter: 'rede': searchString; let i = index;">
+            <td scope="row" class="linkData" (click)="updateTable(line.rede)">{{ line.rede }}</td>
+            <td>{{ line.baseAtivaMesAnterior | currency: 'BRL' }}</td>
+            <td>{{ line.potencialMesAnterior | currency: 'BRL' }}</td>
+            <td>{{ line.totalGanhosClientes | currency: 'BRL' }}</td>
+            <td>{{ line.novosClientes | currency: 'BRL' }}</td>
+            <td>{{ line.novosMigracoesClientes | currency: 'BRL' }}</td>
+            <td>{{ line.totalPerdasClientes | currency: 'BRL' }}</td>
+            <td>{{ line.cancelamentosClientes | currency: 'BRL' }}</td>
+            <td>{{ line.migracoesPerdasClientes | currency: 'BRL' }}</td>
+            <td>{{ line.baseAtivaMesAtual | currency: 'BRL' }}</td>
+            <td>{{ line.potencialMesAtual | currency: 'BRL' }}</td>
+            <td>{{ line.faturamentoCartoesMesAnterior | currency: 'BRL' }}</td>
+            <td>{{ line.faturamentoCartoesMesAtual | currency: 'BRL' }}</td>
+            <td>{{ line.faturamentoMdrMesAnterior | currency: 'BRL' }}</td>
+            <td>{{ line.faturamentoMdrMesAtual | currency: 'BRL' }}</td>
+            <td>{{ line.rebateValorMesAnterior | currency: 'BRL' }}</td>
+            <td>{{ line.rebateValorMesAtual | currency: 'BRL' }}</td>
+            <td>{{ line.fiancaValorMesAnterior | currency: 'BRL' }}</td>
+            <td>{{ line.fiancaValorMesAtual | currency: 'BRL' }}</td>
+            <td>{{ line.clienteAndamentoQtdTotal | currency: 'BRL' }}</td>
+            <td>{{ line.clienteAndamentoFaturamentoRefeicao | currency: 'BRL' }}</td>
+            <td>{{ line.clienteAndamentoFaturamentoAlimentacao | currency: 'BRL' }}</td>
+            <td>{{ line.clienteAndamentoFaturamentoTransporte | currency: 'BRL' }}</td>
+            <td>{{ line.clienteAndamentoFaturamentoTotal | currency: 'BRL' }}</td>
+            <td>{{ line.clienteDeclinadoQtdTotal | currency: 'BRL' }}</td>
+            <td>{{ line.clienteDeclinadoFaturamentoRefeicao | currency: 'BRL' }}</td>
+            <td>{{ line.clienteDeclinadoFaturamentoAlimentacao | currency: 'BRL' }}</td>
+            <td>{{ line.clienteDeclinadoFaturamentoTransporte | currency: 'BRL' }}</td>
+            <td>{{ line.clienteDeclinadoFaturamentoTotal | currency: 'BRL' }}</td>
+        </tr>
+        <!-- <tr *ngFor="let i of info">
+            <td>{{ i.rede }}</td>
+            <td>{{ i.mesAnterior | currency: 'BRL' }}</td>
+            <td>{{ i.ganhosPerdas | currency: 'BRL' }}</td>
+            <td>{{ i.mesAtual | currency: 'BRL' }}</td>
+            <td>{{ i.migracoes | currency: 'BRL' }}</td>
+            <td>{{ i.maisCerto | currency: 'BRL' }}</td>
+        </tr> -->
     </table>
 </div>

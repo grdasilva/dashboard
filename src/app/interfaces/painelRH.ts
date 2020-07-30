@@ -1,0 +1,32 @@
+export interface PainelRH {
+    id: number;
+    rede: string;
+    baseAtivaMesAnterior: number;
+    potencialMesAnterior: number;
+    potencialMesAtual: number;
+    totalGanhosClientes: number;
+    novosClientes: number;
+    novosMigracoesClientes: number;
+    totalPerdasClientes: number;
+    cancelamentosClientes: number;
+    migracoesPerdasClientes: number;
+    baseAtivaMesAtual: number;
+    faturamentoCartoesMesAnterior: number;
+    faturamentoCartoesMesAtual: number;
+    faturamentoMdrMesAnterior: number;
+    faturamentoMdrMesAtual: number;
+    rebateValorMesAnterior: number;
+    rebateValorMesAtual: number;
+    fiancaValorMesAnterior: number;
+    fiancaValorMesAtual: number;
+    clienteAndamentoQtdTotal: number;
+    clienteAndamentoFaturamentoRefeicao: number;
+    clienteAndamentoFaturamentoAlimentacao: number;
+    clienteAndamentoFaturamentoTransporte: number;
+    clienteAndamentoFaturamentoTotal: number;
+    clienteDeclinadoQtdTotal: number;
+    clienteDeclinadoFaturamentoRefeicao: number;
+    clienteDeclinadoFaturamentoAlimentacao: number;
+    clienteDeclinadoFaturamentoTransporte: number;
+    clienteDeclinadoFaturamentoTotal: number;
+}
