@@ -9,11 +9,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PanelComponent } from './screens/panel/panel.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { TabsComponent } from './components/tabs/tabs.component';
+import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PanelComponent,
+    TabsComponent,
+    DynamicTableComponent,
   ],
   imports: [
     BrowserModule,

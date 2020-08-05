@@ -2,6 +2,8 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { PainelRH } from 'src/app/interfaces/painelRH';
 import { PanelService } from 'src/app/services/panel.service';
 import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-table',
@@ -20,13 +22,19 @@ export class TableComponent implements OnInit {
     { name: 'Painel RH', value: 'Painel RH' },
     { name: 'Painel Results', value: 'Painel Results' }
   ];
-
+  
+  displayedColumns: string[] = ['rede', 'baseAtivaMesAnterior', 'potencialMesAnterior', 'totalGanhosClientes', 'novosClientes', 'novosMigracoesClientes', 'totalPerdasClientes', 'cancelamentoClientes', 'migracoesPerdasClientes', 'baseAtivaMesAtual', 'potencialMesAtual', 'faturamentoCartoesMesAnterior', 'faturamentoCartoesMesAtual','faturamentoMdrMesAnterior','faturamentoMdrMesAtual','rebateValorMesAnterior','rebateValorMesAtual','fiancaValorMesAnterior','fiancaValorMesAtual','clienteAndamentoQtdTotal','clienteAndamentoFaturamentoRefeicao','clienteAndamentoFaturamentoAlimentacao','clienteAndamentoFaturamentoTransporte','clienteAndamentoFaturamentoTotal','clienteDeclinadoQtdTotal','clienteDeclinadoFaturamentoRefeicao','clienteDeclinadoFaturamentoAlimentacao','clienteDeclinadoFaturamentoTransporte','clienteDeclinadoFaturamentoTotal'];
+  dataSource: MatTableDataSource<PainelRH>;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(private panelService: PanelService) { }
 
   ngOnInit(): void {
     this.insertDataTable('');
+    this.dataSource = new MatTableDataSource(this.dados);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   addFilter(name): void {

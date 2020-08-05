@@ -1,7 +1,8 @@
 <app-dropdown-input [data]="optionsOfDropdown" (changedData)="onChangedValue($event)"></app-dropdown-input>
 
 <div class="card">
-    <h3 class="card-body"><span (click)="rebuildTable()">INICIO /</span><span *ngFor="let item of displayedFilters"> {{ item | uppercase }} / </span>
+    <h3 class="card-body"><span (click)="rebuildTable()">INICIO /</span><span *ngFor="let item of displayedFilters">
+            {{ item | uppercase }} / </span>
     </h3>
 </div>
 <div class="input-group">
@@ -14,7 +15,8 @@
         <tr class="thead-light">
             <th></th>
             <th rowspan="1" colspan="18">Clientes faturados</th>
-            <th rowspan="1" colspan="5" style="text-align: center;">Clientes em andamento - Data de atualização: {{ dateNow | date: 'dd/MM/yyyy' }}</th>
+            <th rowspan="1" colspan="5" style="text-align: center;">Clientes em andamento - Data de atualização:
+                {{ dateNow | date: 'dd/MM/yyyy' }}</th>
         </tr>
         <tr class="thead-light">
             <th rowspan="2">Rede</th>
