@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { GridComponent } from './components/grid/grid.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.
     PanelComponent,
     TabsComponent,
     DynamicTableComponent,
+    GridComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.
     MaterialModule,
     ComponentsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AgGridModule.withComponents([])
   ],
   providers: [],
   bootstrap: [AppComponent]

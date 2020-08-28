@@ -1,0 +1,16 @@
+<!-- <app-dropdown-input [data]="optionsOfDropdown" (changedData)="onChangedValue($event)"></app-dropdown-input> -->
+
+<mat-radio-group aria-label="Select an option" [(ngModel)]="state">
+    <mat-radio-button class="radioBtn" value="Painel RH BA">RH Base Ativa</mat-radio-button>
+    <mat-radio-button class="radioBtn" value="Painel RH PC">RH Pipeline Clientes</mat-radio-button>
+    <mat-radio-button class="radioBtn" value="Painel EC">Estabelecimento Comercial</mat-radio-button>
+</mat-radio-group>
+
+<div *ngIf="state === 'Painel RH BA'">
+    <ag-grid-angular style="width: 1200px; height: 300px;" class="ag-theme-alpine" [rowData]="rowData"
+        [columnDefs]="columnDefs">
+    </ag-grid-angular>
+</div>
+
+<div *ngIf="state === 'Painel RH PC'"></div>
+<div *ngIf="state === 'Painel EC'"></div>
