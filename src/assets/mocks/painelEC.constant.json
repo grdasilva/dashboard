@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "rede": "REDE SP CAPITAL"
+    },
+    {
+        "id": 2,
+        "rede": "REDE SP INTERIOR III"
+    },
+    {
+        "id": 3,
+        "rede": "REDE SP INTERIOR I"
+    },
+    {
+        "id": 4,
+        "rede": "REDE SUL"
+    },
+    {
+        "id": 5,
+        "rede": "REDE SP METRO I"
+
+    }
+]

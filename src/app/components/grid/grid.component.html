@@ -7,10 +7,19 @@
 </mat-radio-group>
 
 <div *ngIf="state === 'Painel RH BA'">
-    <ag-grid-angular style="width: 1200px; height: 300px;" class="ag-theme-alpine" [rowData]="rowData"
-        [columnDefs]="columnDefs">
+    <ag-grid-angular style="width: 1200px;height: 300px" class="ag-theme-alpine" [rowData]="rowData"
+        [columnDefs]="columnDefs" [defaultColDef]="defaultColDef">
     </ag-grid-angular>
 </div>
 
-<div *ngIf="state === 'Painel RH PC'"></div>
-<div *ngIf="state === 'Painel EC'"></div>
+<div *ngIf="state === 'Painel RH PC'">
+    <ag-grid-angular style="width: 1300px;height: 300px" class="ag-theme-alpine" [rowData]="rowDataRHPC"
+        [columnDefs]="columnDefsRHPC" [defaultColDef]="defaultColDef">
+    </ag-grid-angular>
+</div>
+
+<!-- <div *ngIf="state === 'Painel EC'">
+    <ag-grid-angular style="width: 1200px;height: 300px" class="ag-theme-alpine" [rowData]="rowData"
+        [columnDefs]="columnDefsEC" [defaultColDef]="defaultColDef">
+    </ag-grid-angular>
+</div> -->

@@ -9,17 +9,26 @@ import { PainelEC } from 'src/app/interfaces/painelEC';
 })
 export class PanelComponent implements OnInit {
 
-  data: PainelEC[];
+  dataRHPC: PainelEC[];
+  dataRHBA: PainelEC[];
 
   constructor(private panelService: PanelService) { }
 
   ngOnInit(): void {
     this.getData();
+    this.getDataRHPC();
   }
 
   getData(): void {
     this.panelService.getInformationPanelRH().subscribe((data: any) => {
-      this.data = data;
+      this.dataRHBA = data;
     });
   }
+
+  getDataRHPC(): void {
+    this.panelService.getInformationPanelRH().subscribe((data: any) => {
+      this.dataRHPC = data;
+    });
+  }
+
 }

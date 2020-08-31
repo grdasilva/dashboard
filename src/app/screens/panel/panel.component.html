@@ -11,5 +11,5 @@
     <app-tabs *ngIf="data" [dados]="data"></app-tabs>
 </div> -->
 <div class="grid">
-    <app-grid></app-grid> 
+    <app-grid *ngIf="dataRHBA && dataRHPC" [dados]="dataRHBA" [dadosRHPC]="dataRHPC"></app-grid> 
 </div>

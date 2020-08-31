@@ -11,7 +11,8 @@ import { catchError } from 'rxjs/operators';
 
 export class PanelService {
 
-  readonly urlRH = 'assets/mocks/painelRH.constant.json';
+  readonly urlRH = 'assets/mocks/painelRHBaseAtiva.constant.json';
+  readonly urlRHPC = 'assets/mocks/painelRHPipelineClientes.constant.json';
   readonly urlRH2 = 'assets/mocks/painelRH2.constant.json';
   readonly urlEC = 'assets/mocks/painelEC.constant.json';
   readonly urlRS = 'assets/mocks/painelRS.constant.json';
@@ -21,6 +22,12 @@ export class PanelService {
 
   getInformationPanelRH(): Observable<PainelRH[]> {
     return this.http.get<PainelRH[]>(this.urlRH)
+      .pipe(
+        catchError(this.handleError))
+  }
+
+  getInformationPanelRHPC(): Observable<PainelRH[]> {
+    return this.http.get<PainelRH[]>(this.urlRHPC)
       .pipe(
         catchError(this.handleError))
   }
